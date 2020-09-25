@@ -1,0 +1,22 @@
+function trainAnImage(excelFilePath, image, imageFileName)
+    % 'Training an image'
+    [meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energy, contrast, correlation, homogeneity, sobelArea, cannyArea] = extractFeaturesFromAnImage(image);
+
+    path = convertCharsToStrings(imageFileName);
+    
+    newTableRow = table(path, meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energy, contrast, correlation, homogeneity, sobelArea, cannyArea);
+    
+    % featureArray = [path meanRed meanGreen meanBlue meanGrayscale bwArea entropyVal energy contrast correlation homogeneity sobelArea cannyArea]
+
+    
+    writetable(newTableRow, excelFilePath, 'WriteMode', 'Append', 'WriteVariableNames',false,'WriteRowNames',true);
+
+    %alphabet = ['A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N', 'O', 'P', 'Q'];
+    %usedAlphabets = alphabet(1:totalFeatures);
+    
+    %startingRange = strcat(usedAlphabets(1), num2str(row + 2));
+    %endingRange = strcat(usedAlphabets(end), num2str(row + 2));
+    %range = strcat(startingRange, ':', endingRange);
+    %writematrix(featureArray, excelFilePath, 'Range', range)
+
+    % system('taskkill /F /IM EXCEL.EXE');
