@@ -5,7 +5,7 @@ function [matchingImagePath, distance, className] = recogizeByFeatures(excelFile
     [meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energy, contrast, correlation, homogeneity, sobelArea, cannyArea] = extractFeaturesFromAnImage(image);
 
     % path = convertCharsToStrings(imageFileName); 
-    featureVector = [meanRed meanGreen meanBlue meanGrayscale bwArea entropyVal energy contrast correlation homogeneity sobelArea cannyArea]
+    featureVector = [meanRed meanGreen meanBlue meanGrayscale bwArea entropyVal energy contrast correlation homogeneity sobelArea cannyArea];
     
     excelTable = readtable(excelFilePath);
     
