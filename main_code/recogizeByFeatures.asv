@@ -13,7 +13,8 @@ function [matchingImagePath, distance, className] = recogizeByFeatures(excelFile
     mostSimilarIndex = 1;
     
     for i = 1 : 1: size(excelTable)
-        rowVector = table2array(excelTable(i, 3:end));
+        excelTable(i, 2:end)
+        rowVector = [table2array(excelTable(i, 3)) table2array(excelTable(i, 3:end))];
         euclideanDistance = calculateEuclideanDistance(rowVector, featureVector);
         
         if minDistance > euclideanDistance

@@ -22,12 +22,14 @@ function initializeDataset(excelFilePath, rootPath)
         for jj = 1:numel(C)
             F = fullfile(D, N{ii}, C{jj});
             
+            className = N{ii};
+            
             try
                 FILENAME_MAP(F);
             catch
                 'Checking file'
                 FILENAME_MAP(F) = 1;
-                trainAnImage(excelFilePath, imread(F), F)
+                trainAnImage(excelFilePath, imread(F), F, className)
             end
             
             % do whatever with file F.

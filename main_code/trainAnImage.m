@@ -1,15 +1,19 @@
-function trainAnImage(excelFilePath, image, imageFileName)
+function trainAnImage(excelFilePath, image, imageFileName, className)
     % 'Training an image'
     [meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energy, contrast, correlation, homogeneity, sobelArea, cannyArea] = extractFeaturesFromAnImage(image);
 
     path = convertCharsToStrings(imageFileName);
+    class = {className};
+    newTableRow = table(path, class, meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energy, contrast, correlation, homogeneity, sobelArea, cannyArea);
     
-    newTableRow = table(path, meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energy, contrast, correlation, homogeneity, sobelArea, cannyArea);
+    % featureArray = [path className meanRed meanGreen meanBlue meanGrayscale bwArea entropyVal energy contrast correlation homogeneity sobelArea cannyArea]
     
-    % featureArray = [path meanRed meanGreen meanBlue meanGrayscale bwArea entropyVal energy contrast correlation homogeneity sobelArea cannyArea]
-
-    
-    writetable(newTableRow, excelFilePath, 'WriteMode', 'Append', 'WriteVariableNames',false,'WriteRowNames',true);
+    if isfile(excelFilePath)
+        needHeader = size(readtable(excelFilePath), 1) <= 0;
+    else
+        needHeader = true;
+    end
+    writetable(newTableRow, excelFilePath, 'WriteMode', 'Append', 'WriteVariableNames',needHeader,'WriteRowNames',false);
 
     %alphabet = ['A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N', 'O', 'P', 'Q'];
     %usedAlphabets = alphabet(1:totalFeatures);
