@@ -13,7 +13,7 @@ function trainAnImage(excelFilePath, image, imageFileName, className)
     else
         needHeader = true;
     end
-    writetable(newTableRow, excelFilePath, 'WriteMode', 'Append', 'WriteVariableNames',needHeader,'WriteRowNames',false);
+    writetable(newTableRow, excelFilePath, 'WriteMode', 'Append', 'WriteVariableNames', needHeader, 'WriteRowNames', false);
 
     %alphabet = ['A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N', 'O', 'P', 'Q'];
     %usedAlphabets = alphabet(1:totalFeatures);

@@ -1,5 +1,5 @@
 
-function [finalImage, statistic] = isolateChannel(channelName, image)
+function [finalImage, meanColorLevel] = isolateChannel(channelName, image)
     tempImage = image;
     switch channelName
         case 'r'
@@ -18,4 +18,4 @@ function [finalImage, statistic] = isolateChannel(channelName, image)
             tempImage = image;
     end
     finalImage = tempImage;
-    statistic = mean(mean(mean(finalImage(:,:,chIndex))));
+    meanColorLevel = mean(mean(mean(finalImage(:,:,chIndex))));

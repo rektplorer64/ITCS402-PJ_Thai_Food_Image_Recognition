@@ -7,7 +7,7 @@ function [meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energ
 
     meanGrayscale = mean(mean(gray));
 
-    bw =~ im2bw(gray); 
+    bw =~ imbinarize(gray); 
     bwArea = bwarea(bw) / 100;
     [cannyEdge, cannyArea] = calculateCannyEdge(bw);
     [sobelEdge, sobelArea] = calculateSobelEdge(bw);

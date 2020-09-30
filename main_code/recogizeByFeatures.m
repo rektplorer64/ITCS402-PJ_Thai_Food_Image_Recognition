@@ -12,15 +12,18 @@ function [matchingImagePath, distance, className] = recogizeByFeatures(excelFile
     minDistance = 100000000;
     mostSimilarIndex = 1;
     
-    for i = 1 : 1: size(excelTable)
-        rowVector = table2array(excelTable(i, 3:end));
-        euclideanDistance = calculateEuclideanDistance(rowVector, featureVector);
-        
-        if minDistance > euclideanDistance
-            minDistance = euclideanDistance;
-            mostSimilarIndex = i;
-        end
-    end
+    %for i = 1 : 1: size(excelTable)
+    %    rowVector = table2array(excelTable(;, 3:end));
+    %    euclideanDistance = calculateEuclideanDistance(rowVector, featureVector);
+    %    
+    %    if minDistance > euclideanDistance
+    %        minDistance = euclideanDistance;
+    %        mostSimilarIndex = i;
+    %    end
+    %end
+    excelRows = table2array(excelTable(:, 3:end));
+    euclideanDistance = calculateEuclideanDistance(excelRows, featureVector);
+    [minDistance, mostSimilarIndex] = min(euclideanDistance);
     
     distance = minDistance;
     matchingImagePath = table2array(excelTable(mostSimilarIndex, 1));
