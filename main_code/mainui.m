@@ -88,6 +88,11 @@ function mainui_OpeningFcn(hObject, eventdata, handles, varargin)
         showImageLeft(handles, originalImage)
     end
     
+    global originalImageFileName
+    if exist('originalImageFileName')
+        setTextLeft(handles, originalImageFileName)
+    end
+    
     global GLCM_OFFSETS
     GLCM_OFFSETS = [0 1; -1 1;-1 0;-1 -1];
     
