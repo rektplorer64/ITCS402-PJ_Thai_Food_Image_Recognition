@@ -30,6 +30,6 @@ function finalImage = scaleimage(image)
        readImage = imresize(readImage, scalingFactor);
     end
     
-    finalImage = readImage;
+    finalImage = imresize(readImage, [224 NaN]);
 end
 

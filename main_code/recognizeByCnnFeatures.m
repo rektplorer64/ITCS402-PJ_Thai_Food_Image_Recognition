@@ -19,7 +19,7 @@ function className = recognizeByCnnFeatures(svmModelFileName, imageToBeClassifie
         'Classifying Image...'
         % Pass CNN image features to trained classifier
         prediction = predict(TRAINED_SVM_CLASSIFIER, testFeatures, 'ObservationsIn', 'columns');
-        className = string(prediction);
+        className = string(prediction)
         return
     end
     className = 'No Trained Classifier Present!';

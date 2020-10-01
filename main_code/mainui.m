@@ -22,7 +22,7 @@ function varargout = mainui(varargin)
 
     % Edit the above text to modify the response to help mainui
 
-    % Last Modified by GUIDE v2.5 30-Sep-2020 11:09:19
+    % Last Modified by GUIDE v2.5 01-Oct-2020 20:32:02
 
     % Begin initialization code - DO NOT EDIT
     gui_Singleton = 1;
@@ -68,7 +68,7 @@ function mainui_OpeningFcn(hObject, eventdata, handles, varargin)
     global svmModelFileName
     svmModelFileName = 'trained-svm-classifier.mat';
     
-    DATASET_PATH = '../datasets/sample';
+    DATASET_PATH = '../datasets/FINAL DATASET';
     
     setTextStatus(handles, 'Initializing Dataset')
     initializeDataset(excelFilePath, DATASET_PATH)
@@ -77,11 +77,16 @@ function mainui_OpeningFcn(hObject, eventdata, handles, varargin)
     
     global datasetClasses;
     load('dataset-classes.mat', 'CLASSNAMES')
-    datasetClasses = CLASSNAMES;
-    set(handles.labelDropdownMenu, 'String', cell2mat(datasetClasses)')
+    datasetClasses = [];
+   
+    for i = 1:size(CLASSNAMES, 2)
+        datasetClasses = [datasetClasses; string(CLASSNAMES(1, i))];
+    end
+
+    set(handles.labelDropdownMenu, 'String', datasetClasses)
     
     global datasetClassDropdownSelectedLabel 
-    datasetClassDropdownSelectedLabel = datasetClasses(1);
+    datasetClassDropdownSelectedLabel = datasetClasses(1, 1);
     
     global originalImage
     if exist('originalImage')
@@ -305,12 +310,13 @@ function contrastBtn_Callback(hObject, eventdata, handles)
     setTextRight(handles, strjoin(['Contrast:' string(contrast)]))
 
 
-% --- Executes on button press in pushbutton17.
-function pushbutton17_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton17 (see GCBO)
+% --- Executes on button press in exitBtn.
+function exitBtn_Callback(hObject, eventdata, handles)
+% hObject    handle to exitBtn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+close
+exi
 
 % --- Executes on button press in entropyBtn.
 function entropyBtn_Callback(hObject, eventdata, handles)
