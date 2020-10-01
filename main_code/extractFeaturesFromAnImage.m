@@ -7,10 +7,15 @@ function [meanRed, meanGreen, meanBlue, meanGrayscale, bwArea, entropyVal, energ
 
     meanGrayscale = mean(mean(gray));
 
+    imageSize = size(image, 1) * size(image, 2);
     bw =~ imbinarize(gray); 
-    bwArea = bwarea(bw) / 100;
-    [cannyEdge, cannyArea] = calculateCannyEdge(bw);
-    [sobelEdge, sobelArea] = calculateSobelEdge(bw);
-
-    entropyVal = entropy(rangefilt(image)) * 100;
+    bwArea = (bwarea(bw) / imageSize) * 1000;
+    
+    [~, rawCannyArea] = calculateCannyEdge(bw);
+    cannyArea = (rawCannyArea / imageSize) * 1000;
+    
+    [~, rawSobelArea] = calculateSobelEdge(bw);
+    sobelArea = (rawSobelArea / imageSize) * 1000;
+    
+    entropyVal = entropy(rangefilt(image)) * 1000;
     

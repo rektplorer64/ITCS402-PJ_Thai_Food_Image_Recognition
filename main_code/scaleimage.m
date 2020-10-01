@@ -30,7 +30,6 @@ function finalImage = scaleimage(image)
        readImage = imresize(readImage, scalingFactor);
     end
     
-    size(readImage)
     finalImage = readImage;
 end
 
