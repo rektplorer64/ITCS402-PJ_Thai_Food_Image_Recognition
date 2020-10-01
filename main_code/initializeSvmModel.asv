@@ -1,0 +1,15 @@
+function initializeSvmModel(svmModelFileName, rootDatasetPath)
+%INITIALIZESVMMODEL Summary of this function goes here
+%   Detailed explanation goes here
+    if exist(svmModelFileName, 'file') ~= 2
+        return
+    end
+    imgDs = imageDatastore(rootDatasetPath, ...
+        'FileExtensions', {'.jpg', '.png'}, ...
+        'IncludeSubfolders',true, ...
+        'LabelSource',"foldernames", 'Read');
+    
+    net = resnet101();
+    augmentedTrainingSet = augmentedImageDatastore(imgDs, trainingSet, "OutputSizeMode", "centercrop");
+end
+

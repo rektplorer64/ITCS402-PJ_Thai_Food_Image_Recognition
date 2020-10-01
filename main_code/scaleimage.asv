@@ -1,0 +1,60 @@
+function finalImage = scaleimage(image)
+%SCALEIMAGE Summary of this function goes here
+%   Detailed explanation goes here
+
+image
+    if ischar(image)
+        image = imread(image);
+    end
+    
+    RES_NET_INPUT_SIZE = 224;
+   
+    [height, width, ~] = size(image);
+
+    if height <= RES_NET_INPUT_SIZE
+       scalingFactor = RES_NET_INPUT_SIZE / height;
+       image = imresize(image, scalingFactor);
+    end
+    if width ~= RES_NET_INPUT_SIZE
+       scalingFactor = RES_NET_INPUT_SIZE / width;
+       image = imresize(image, scalingFactor);
+    end
+
+    precroppedSizeWidthPx = size(image,2);
+    precroppedSizeHeightPx = size(image, 1);
+
+    size(image)
+    % figure ,imshow(image);
+
+    i3_start = floor((precroppedSizeHeightPx - RES_NET_INPUT_SIZE) / 2); % or round instead of floor; using neither gives warning
+    if i3_start <= 0
+        i3_start = 1;
+    end
+    i3_stop = min(precroppedSizeHeightPx, i3_start - 1 + RES_NET_INPUT_SIZE);
+
+    i4_start = floor((precroppedSizeWidthPx - RES_NET_INPUT_SIZE) / 2);
+    if i4_start <= 0
+        i4_start = 1;
+    end
+    i4_stop = min(precroppedSizeWidthPx, i4_start - 1 + RES_NET_INPUT_SIZE);
+
+    %i3_start
+    %i3_stop
+    i4_start
+    i4_stop
+    readImage = image(i3_start:i3_stop, i4_start:i4_stop, :);
+    
+    %[height, width, ~] = size(readImage);
+
+    %if height ~= RES_NET_INPUT_SIZE
+    %   scalingFactor = RES_NET_INPUT_SIZE / height;
+    %   readImage = imresize(readImage, scalingFactor);
+    %elseif width ~= RES_NET_INPUT_SIZE
+    %   scalingFactor = RES_NET_INPUT_SIZE / width;
+    %   readImage = imresize(readImage, scalingFactor);
+    %end
+
+    size(readImage)
+    finalImage = readImage;
+end
+
