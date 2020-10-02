@@ -120,7 +120,7 @@ function showImageLeft(handles, image)
     
     axes(handles.imageViewLeft)
     if ~isequal(image, [1 1; 1 1])
-        res = strjoin(["Resolution: " string(size(image,1)) "×" string(size(image,2)) "px"], ' ');
+        res = strjoin(["Resolution: " string(size(image,2)) "×" string(size(image,1)) "px"], ' ');
         imshow(image);
     else
         res = "Resolution: -";
