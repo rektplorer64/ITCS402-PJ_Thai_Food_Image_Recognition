@@ -21,3 +21,5 @@ for folder in list:
 # print(fileCountList)
 number_files = len(list)
 print(tabulate(fileCountList))
+print("⭐ Total Classes:\t", len(fileCountList))
+print("⭐ Total Images:\t\t", sum(map(lambda x: x[1], fileCountList)))
