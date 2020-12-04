@@ -11,96 +11,84 @@
 
 # Thai Food Image Recognition
 
-<p>A project that implemented various kind of learning-based techniques such as SVM, and CNN to classify Thai food images.</p>
+<p>A project that implemented various kind of learning-based techniques such as SVM, and CNN to classify Thai food images. The models were trained using a dataset of Thai food images with 38 classes each of which has 250 images.</p>
 </div>
 
 ![Project Hero Image](/repo_metadata/hero_image.png)
 
-## 🚩 Motivations
-After finishing the first year of study at Mahidol University, the Faculty of ICT, I was equipped with knowledge and 
-skills in Java programming language and desire to put Android knowledge from self-study (via Udacity) to a better use. 
-I decided to create an application that allows me to understand the underlying Android application framework even more.
+## 🚩 Abstract
+Due to the nature of cooking and food in general, recognizing foods from their visual appearance proves to be a difficult task because of the visual diversity and the
+visual similarity of each type of food. In this paper, we conducted a comparative study on multiple deep learning-based models for the multi-class Thai food recognitions using food dish photos. We experimented with a total of 10 classification models, four of which are designed and trained from scratch. The other five is built upon existing pre-trained models using transfer learning. The other uses the naive feature similarity technique. To evaluate the performance of all models, we also accumulated photos from the internet and our own photos to create a dataset of 38 classes each of which has 250 images. We discovered that models from transfer learning are generally more efficient in training and more performant even when the dataset is small than the ones trained from scratch. Moreover, we also found that training models from scratch are time-consuming and troublesome because there are countless hyperparameters to be dealt with. However, despite the fact that transfer learning models are better, they are unable to distinguish and correctly classify some distinct kind of foods are visually similar.
 
-The application that I choose to build is a simple personal inventory manager.  
+## 🖼 Dataset
+The dataset that we used has 9,500 images. Currently, there are 38 kinds of Thai foods, each of which has 250 images. 
+|Name                                      |Thai Name              |
+|------------------------------------------|-----------------------|
+|Caesar Salad                              |ซีซาร์สลัด             |
+|Charcoal Boiled Pork neck                 |คอหมูย่าง              |
+|Chow mein                                 |หมี่ซั่ว               |
+|Coconut Milk Soup                         |ต้มข่าไก่              |
+|Fried Mussel Pancakes                     |หอยแมลงภู่ทอด          |
+|Green Curry                               |แกงเขียวหวาน           |
+|Hamburger                                 |แฮมเบอร์เกอร์          |
+|Hot and sour  fish and vegetable ragout   |แกงส้ม                 |
+|Kebab                                     |เคบับ                  |
+|Khao Soi                                  |ข้าวซอย                |
+|Noodles with Fish Curry                   |ขนมจีน                 |
+|Omlette                                   |ไข่เจียว               |
+|Onion Rings                               |หอมหัวใหญ่ชุบแป้งทอด   |
+|Pad Thai                                  |ผัดไทย                 |
+|Peking Duck                               |เป็ดปักกิ่ง            |
+|Pizza                                     |พิซซ่า                 |
+|Spaghetti Bolognese                       |สปาเกตตี้ซอสเนื้อ      |
+|Spaghetti Carbonara                       |สปาเก็ตตี้คาโบนาร่า    |
+|Spring Rolls                              |ปอเปี๊ยะ               |
+|Steak                                     |สเต็ก                  |
+|Steamed Rice Roll                         |ก๋วยเตี๋ยวหลอด         |
+|Stewed Pork Leg                           |ขาหมู                  |
+|Thai Papaya Salad                         |ส้มตำไทย               |
+|Yellow Curry                              |แกงกะหรี่              |
+|Fried Pork with Rice                      |ข้าวหมูทอด             |
+|Barbecued red pork in sauce with Rice     |ข้าวหมูแดง             |
+|Rice crispy pork                          |ข้าวหมูกรอบ            |
+|Crispy Pork with Kale with Rice           |ข้าวคะน้าหมูกรอบ       |
+|Pad see ew                                |ผัดซีอิ้ว              |
+|Noodles without soup                      |ก๋วยเตี๋ยวแห้ง         |
+|Noodles                                   |ก๋วยเตี๋ยวน้ำ          |
+|Rice topped with stir-fried meat and basil|ข้าวผัดกะเพราเนื้อสัตว์|
+|Fried rice                                |ข้าวผัด                |
+|Steamed chicken with rice                 |ข้าวมันไก่             |
+|Fried chicken with rice                   |ข้าวมันไก่ทอด          |
+|Steak with Rice                           |ข้าวเนื้อสเต็ก         |
+|Spicy Chicken Salad with rice             |ข้าวยำไก่แซ่บ          |
+|Spicy Stir Fried Pork with Red Curry Paste|ข้าวผัดเผ็ดหมู         |
 
-## 😀 Features
-- [x] Persistent local inventory database via an early version of Room Database
-- [x] Image Storage for each item
-- [x] Item tagging by a color or terms 
-- [x] Responsive layout
-    - Dual-pane for tablet
-    - Single-pane for vertical form-factor devices and phones
-- [x] Customizable item list view (Grid/List)
-- [x] Detailed item search and filters
-    - Search by
-        1. Keyword in either item name/description/ID
-        2. Date Created
-        3. Date Modified
-        4. Has any image or not
-        5. Quantity of the item
-        6. Tags
-    - Sort by
-        1. Item ID
-        2. Item Name
-        3. Item Description
-        4. Date Created
-        5. Date Modified
-        6. Color Accent
-        7. Quantity
-        8. Rating
-- [x] User Reviewing (Mimicked)
-- [ ] ~~Online Data Synchronization~~ Out of the project scope during that time
 
 ## 🛠 Implementation
 
-**DISCLAIMER**: This app has no clean architecture whatsoever because IT IS MY FIRST APP. Plus, during that time, there were literally no design guideline recommended by Google available.
+This project has 2 phases:
+1. **Phase 1:** Implemented using **MATLAB**
+    - There are 2 models implemented in this phase.
+        1. **Image Features Vector Similarity** - This method utilizes manual image features extraction such as mean color values, texture features (e.g. homogeity, energy, entropy) along with the area size of edge and so on. This technique proves to be very naive because, for each image, features are packed as a vector and compared using cosin similarity.
+        2. **Transfer Learning using CNN as a feature extractor for a SVM (Support Vector Machine)** - This method relies on a pre-trained CNN, in this case ResNet50, and another SVM. Basically, we feed an image into the pre-trained CNN in order to get the activation of the last fully-connected layer. We use that to feed train an SVM to ensure that it learns to classify our images. We repeat this process for every train image. Then we later use the train SVM to predict.
+2. **Phase 2:** Implemented using **Python with Keras and TensorFlow**
+    - There are 8 models implemented in this phase.
+        1. First 4 models are **designed and trained from scratch**
+        2. The other 4 models are pre-trained models for **transfer learning**
+            - DenseNet201
+            - ResNet101v2
+            - ResNet50v2
+            - Xception
+    - Summary: The transfer learning models are obviously a better choice for its training efficiency and performance. Our custom models are outperformed by transfer learning models.
 
-1. **AsyncTask** - for item search and sorting in the background thread
-2. **Material Design Component** - Most of the UI elements are based on Google's Material Design.
-3. **RecyclerView** 
-    - There are multiple types of RecyclerViewAdapter that are implemented.
-    - To change the list item layout at runtime (e.g. Full-height card to small card), there are nasty method calls that force the layout to be redrawn that could lead to performance impacts.
-    - During the time of development, multi-selection in RecyclerView needed to be implemented manually. Therefore, there might be some glitches.
-4. **Fragment** - They allow some layouts to be reused from time-to-time. For example, the item detail modal (pop-up) when clicking an item in a search result.
-    - It is used to implement Circular revealing User Interface.
-    - It allows me to create a dual-pane User Interface layout for the tablet form-factor because I do not have to have redundant part of source code for different layouts.
-    - Manual Fragment Transaction is used heavily in this project because there were not any abstraction provided by the framework.
-5. **Preference** - For the search and filter page, the search and filter settings that user has adjusted are automatically saved and restored for the user.
-6. **Room Database** - Basically, SQLite used internally in an Android application to store data persistently on disk. 
-    - I actually designed a simple relational model for this app too.
-    - The database is lazily initialized when the app runs for the first time. Data will be randomly generated at first launch.
-    
+## 📃 Submitted Papers
+- Phase 1: [Link](https://github.com/rektplorer64/ITCS402-PJ_Thai_Food_Image_Recognition/blob/master/Digital_Image_Processing___MATLAB___Project_Paper.pdf)
+- Phase 2: [Link](https://github.com/rektplorer64/ITCS402-PJ_Thai_Food_Image_Recognition/blob/master/Digital_Image_Processing___PYTHON___Project_Paper.pdf)
+
 ## 🎓 What I learned from this project
-1. I should have **thought carefully** regarding how to organize each piece of code.
-2. **Abstraction and Encapsulation** is important because it reduces clutters and duplicate code significantly.
-3. Always perform CPU intensive task in the **background thread**.
-4. You should always be **careful when dealing with multi-threads**. Sometimes it leads to weird bugs that sometimes magically disappear and appear back-and-forth.
-5. **Java is not as hard** as I thought it would be.
-6. **Room Database** is a way better than good ol' Database Cursor.
+1. Training deep learning models really take a lot of time even if you have a lot of computing resources.
+2. Careful parameter finetuning is very important because it means you are less like to spend less time to try it out by training.
+3. Transfer learning is like a cheat to get an outstanding performance.
+4. Preparing dataset is quite an time-consuming task.
+5. My knowledge from deeplearning.ai 's Deep Learning course on Coursera can be applied to this project.
 
-## 🖼 Screenshots
-There are two panes that uses the screen real-estate efficiently. 
-![There are two panes that uses the screen real-estate efficiently.](/previews/images/1.png)
-
-The item list can be changed in terms of the appearance, and the number of columns.
-| | | |
-|:-------------------------:|:-------------------------:|:-------------------------:|
-|<img width="1604" alt="Compact List view" src="/previews/images/2.png"> |  <img width="1604" alt="Small List view" src="/previews/images/3.png">| <img width="1604" alt="Full image height List view" src="/previews/images/4.png">|
-
-This page also support vertical layout.
-![Vertical List](/previews/images/5.png)
-
-There are also another page for Search and Filter! You can also change the layout too. Just like the main list page! If you look carefully, you will see that the search keyword is being made bold in the result list.
-| One-column Search Results | Two-column Search Results |
-|:-------------------------:|:-------------------------:|
-|<img width="1604" alt="Search page with 1 list column" src="/previews/images/6.png"> | <img width="1604" alt="Search page with 2 list columns" src="/previews/images/6-1.png"> | 
-
-## 📽 Demos
-![Item List](/previews/videos/1-item_list.gif)
-![Item rating](/previews/videos/2-rate_comment.gif)
-![Image Persistence](/previews/videos/3-image_persistence.gif)
-![Item Detail Editing](/previews/videos/3-item_detail_editing.gif)
-![Screen Rotation](/previews/videos/5-screen_rotation.gif)
-![Searching UI](/previews/videos/6-search.gif)
-
- 
